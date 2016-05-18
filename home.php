@@ -30,33 +30,30 @@ get_header(); ?>
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-8">
-				<?php
-					if ( have_posts() ) : ?>
-			
-						<header class="page-header">
-							<h1 class="page-title"><?php printf( esc_html__( 'Search Results for: %s', '_s' ), '<span>' . get_search_query() . '</span>' ); ?></h1>
-						</header><!-- .page-header -->
-			
-						<?php
-						/* Start the Loop */
-						while ( have_posts() ) : the_post();
-			
-							/**
-							 * Run the loop for the search to output the results.
-							 * If you want to overload this in a child theme then include a file
-							 * called content-search.php and that will be used instead.
-							 */
-							get_template_part( 'template-parts/content', 'search' );
-			
-						endwhile;
-			
-			
-					else :
-			
-						get_template_part( 'template-parts/content', 'none' );
-			
-					endif; 
-				?>
+				<?php if(have_posts()) : while(have_posts()) : the_post();?>
+					<article>
+						<div class="post-image">
+							<div class="post-heading">
+								<h3><a href="<?php the_permalink();?>"><?php the_title();?></a></h3>
+							</div>
+							<?php if(get_the_post_thumbnail()) : ?>
+                        <?php the_post_thumbnail('large');?>
+                    <?php endif;?>
+						</div>
+						<p>
+							<?php echo strip_tags(the_excerpt());?>
+						</p>
+						<div class="bottom-article">
+							<ul class="meta-post">
+								<li><i class="icon-calendar"></i><a href="#"> <?php the_time('F, j, Y');?></a></li>
+								<li><i class="icon-user"></i><a href="#"><?php the_author_posts_link();?></a></li>
+								<li><i class="icon-folder-open"></i><a href="#"><?php the_category( ' ' ); ?></a></li>
+								<li><i class="icon-comments"></i><a href="#"><?php comments_number(); ?>.</a></li>
+							</ul>
+							<a href="<?php the_permalink();?>" class="pull-right">Continue reading <i class="icon-angle-right"></i></a>
+						</div>
+				</article>
+				<?php endwhile; endif;?>
 				
 				<div id="pagination">
 					<?php wp_pagenavi(); ?>	
@@ -125,5 +122,3 @@ get_header(); ?>
 	</div>
 	</section>
 	<?php get_footer();?>
-
-

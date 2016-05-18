@@ -1,5 +1,14 @@
 <?php
 /**
+ * Template Name: Front Page
+ *
+ * @package WordPress
+ * @subpackage _s
+ * @since _s 1.0
+ */
+ ?>
+<?php
+/**
  * The main template file.
  *
  * This is the most generic template file in a WordPress theme
