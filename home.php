@@ -47,7 +47,12 @@ get_header(); ?>
 							<ul class="meta-post">
 								<li><i class="icon-calendar"></i><a href="#"> <?php the_time('F, j, Y');?></a></li>
 								<li><i class="icon-user"></i><a href="#"><?php the_author_posts_link();?></a></li>
-								<li><i class="icon-folder-open"></i><a href="#"><?php the_category( ' ' ); ?></a></li>
+								<li><i class="icon-folder-open"></i>
+									<a href="<?php the_permalink();?>"><?php
+									  $categories = get_the_category();
+    								echo $categories[0]->name;  
+									?></a>
+								</li>
 								<li><i class="icon-comments"></i><a href="#"><?php comments_number(); ?>.</a></li>
 							</ul>
 							<a href="<?php the_permalink();?>" class="pull-right">Continue reading <i class="icon-angle-right"></i></a>
@@ -66,6 +71,7 @@ get_header(); ?>
 						<input class="form-control" type="text" placeholder="Search.." value="<?php echo wp_specialchars($s, 1); ?>" name="s" id="s" onfocus="if(this.value==this.defaultValue)this.value='';" onblur="if(this.value=='')this.value=this.defaultValue;">
 					</form>
 				</div>
+				<?php if(! dynamic_sidebar("Catagories")): ?>
 				<div class="widget">
 					<h5 class="widgetheading">Categories</h5>
 					<ul class="cat">
@@ -76,6 +82,7 @@ get_header(); ?>
 						<li><i class="icon-angle-right"></i><a href="#">About finance</a><span> (18)</span></li>
 					</ul>
 				</div>
+				<?php endif;?>
 				<?php if(! dynamic_sidebar('Latest Post') ): ?>
 				<div class="widget">
 					
@@ -105,17 +112,9 @@ get_header(); ?>
 					</ul>
 				</div>
 				<?php endif;?>
-				<div class="widget">
-					<h5 class="widgetheading">Popular tags</h5>
-					<ul class="tags">
-						<li><a href="#">Web design</a></li>
-						<li><a href="#">Trends</a></li>
-						<li><a href="#">Technology</a></li>
-						<li><a href="#">Internet</a></li>
-						<li><a href="#">Tutorial</a></li>
-						<li><a href="#">Development</a></li>
-					</ul>
-				</div>
+				<?php if(! dynamic_sidebar('Tags') ):?>
+					<p>Add Sidebar here</p>
+				<?php endif;?>
 				</aside>
 			</div>
 		</div>

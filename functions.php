@@ -145,6 +145,33 @@ function latest_post() {
 }
 add_action( 'widgets_init', 'latest_post' );
 
+
+function used_tags() {
+	register_sidebar( array(
+		'name'          => 'Tags',
+		'id'            => 'tags',
+		'description'   => esc_html__( 'Populate this widget with latest post', '_s' ),
+		'before_widget' => '<div class="widget link-list">',
+		'after_widget'  => '</div>',
+		'before_title'  => '<h5 class="widgetheading">',
+		'after_title'   => '</h5>',
+	) );
+}
+add_action( 'widgets_init', 'used_tags' );
+function catagories() {
+	register_sidebar( array(
+		'name'          => 'Catagories',
+		'id'            => 'catagories',
+		'description'   => esc_html__( 'Populate this widget with latest post', '_s' ),
+		'before_widget' => '<div class="widget link-list">',
+		'after_widget'  => '</div>',
+		'before_title'  => '<h5 class="widgetheading">',
+		'after_title'   => '</h5>',
+	) );
+}
+add_action( 'widgets_init', 'catagories' );
+
+
 /**
  * Enqueue scripts and styles.
  */
